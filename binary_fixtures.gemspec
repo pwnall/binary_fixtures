@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "binary_fixtures.gemspec",
     "lib/binary_fixtures.rb",
     "lib/binary_fixtures/fixture_helpers.rb",
     "lib/binary_fixtures/patch_rails.rb",
