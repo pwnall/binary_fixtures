@@ -10,11 +10,11 @@ Add the gem to test group in the Gemfile.
       gem 'binary_fixtures'
     end
 
-Import a binary file in your fixtures.
+Import a binary file in your fixtures. Paths are relative to test/fixtures.
 
     attachment:
-      file_contents: !binary |-
-        <%= binary_file('binaries/kitten.png') %>
+      file_contents: <%= binary_file('files/kitten.png') %>
+      file_size: <%= binary_file_size('files/kitten.png') %>
 
 == Contributing to binary_fixtures
 
@@ -28,6 +28,5 @@ Import a binary file in your fixtures.
 
 == Copyright
 
-Copyright (c) 2013 Victor Costan. See LICENSE.txt for
-further details.
+Copyright (c) 2013 Victor Costan, released under the MIT license.
 

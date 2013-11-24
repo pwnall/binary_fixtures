@@ -1,9 +1,11 @@
 ruby:
   name: ruby.png
   mime_type: image/png
+  size: <%= binary_file_size('files/ruby.png') %>
   data: <%= binary_file('files/ruby.png') %>
 
 invoice:
     name: invoice.pdf
     data: <%= binary_file('files/invoice.pdf', indent: 4) %>
+    size: <%= binary_file_size('files/invoice.pdf') %>
     mime_type: application/pdf

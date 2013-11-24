@@ -23,4 +23,14 @@ module BinaryFixtures::FixtureHelpers
 
     "!!binary |\n#{indent}#{base64_data}"
   end
+
+  # The number of bytes in a binary file.
+  #
+  # @param [String] path the path of the binary file to be included, relative
+  #   to the Rails application's test/fixtures directory
+  # @return [Integer] the nubmer of bytes in the file
+  def binary_file_size(path)
+    file_path = Rails.root.join('test/fixtures').join(path)
+    File.stat(file_path).size
+  end
 end  # module BinaryFixtures::FixtureHelpers

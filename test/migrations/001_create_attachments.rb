@@ -3,6 +3,7 @@ class CreateAttachments < ActiveRecord::Migration
     create_table :attachments do |t|
       t.string :name, length: 64, null: false
       t.string :mime_type, length: 64, null: false
+      t.number :size, null: false
       t.binary :data, null: false
     end
   end
