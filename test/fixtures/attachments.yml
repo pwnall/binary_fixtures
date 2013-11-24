@@ -1,0 +1,9 @@
+ruby:
+  name: ruby.png
+  mime_type: image/png
+  data: <%= binary_file('files/ruby.png') %>
+
+invoice:
+    name: invoice.pdf
+    data: <%= binary_file('files/invoice.pdf', indent: 4) %>
+    mime_type: application/pdf
