@@ -24,7 +24,7 @@ class BinaryFixturesTest < ActiveSupport::TestCase
   test 'invoice metadata was set up correctly' do
     assert_equal 'invoice.pdf', @invoice.name
     assert_equal 'application/pdf', @invoice.mime_type
-    assert_equal File.stat(@ruby_path).size, @invoice.size
+    assert_equal File.stat(@invoice_path).size, @invoice.size
   end
 
   test 'invoice binary data was set up correctly' do
