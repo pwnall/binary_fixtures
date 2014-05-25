@@ -4,6 +4,9 @@ env:
   - DB=mysql:utf8_bin
   - DB=pg DB_USER=postgres
   - DB=sqlite
+gemfile:
+  - Gemfile.rails40
+  - Gemfile.rails41
 rvm:
-  - 1.9.3
   - 2.0.0
+  - 2.1.0

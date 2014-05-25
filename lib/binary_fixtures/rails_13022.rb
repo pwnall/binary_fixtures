@@ -2,34 +2,26 @@ require 'active_record'
 require 'active_record/fixtures'
 
 # Packaged version of https://github.com/rails/rails/pull/13022
-unless defined?(ActiveRecord::FixtureSet::RenderContext)
-  # The context used by the ERB fixture renderer.
-  #
-  # Make helper functions available in your fixtures by defining them in a
-  # module and including it in ActiveRecord::FixtureSet::RenderContext.
-  #
-  # A new subclass of this class is created each time the ERB renderer is
-  # called so that methods defined in ERB templates do not leak into other
-  # templates' context.
-  class ActiveRecord::FixtureSet::RenderContext
-    # An instance of a new RenderContext subclass.
-    def self.create
-      klass = ::Class.new(ActiveRecord::FixtureSet::RenderContext) do
-        def get_binding
-          binding()
-        end
-      end
+unless ActiveRecord::FixtureSet.respond_to?(:context_class)
+  class ActiveRecord::FixtureSet # :nodoc:
+    # Superclass for the evaluation contexts used by ERB fixtures.
+    def self.context_class
+      @context_class ||= Class.new
+    end
 
-      klass.new
+    class File
+      def render(content)
+         context = ActiveRecord::FixtureSet::RenderContext.create_subclass.new
+         ERB.new(content).result(context.get_binding)
+      end
     end
   end
 
-  module ActiveRecord
-    class FixtureSet
-      class File
-        def render(content)
-          context = ActiveRecord::FixtureSet::RenderContext.create
-          ERB.new(content).result(context.get_binding)
+  class ActiveRecord::FixtureSet::RenderContext # :nodoc:
+    def self.create_subclass
+      Class.new ActiveRecord::FixtureSet.context_class do
+        def get_binding
+          binding()
         end
       end
     end
